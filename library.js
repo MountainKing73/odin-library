@@ -14,7 +14,12 @@ function addBookToLibrary(book) {
 function displayLibrary() {
   const library = document.querySelector("#library");
 
+  if (document.contains(document.getElementById("libraryTable"))) {
+    document.getElementById("libraryTable").remove();
+  }
+
   const table = document.createElement("table");
+  table.setAttribute("id", "libraryTable");
 
   const headers = ["Title", "Author", "Pages", "Read"];
   let thead = table.createTHead();
@@ -37,6 +42,37 @@ function displayLibrary() {
 
   library.append(table);
 }
+
+function submitClick(event) {
+  console.log("Submit clicked");
+  event.preventDefault();
+
+  const bookTitle = document.querySelector("#bname");
+  const author = document.querySelector("#author");
+  const pages = document.querySelector("#pages");
+
+  console.log("book title object: " + bookTitle);
+  console.log("title: " + bookTitle.value);
+  console.log("author: " + author.value);
+  console.log("pages: " + pages.value);
+
+  const newBook = new Book(
+    bookTitle.value,
+    author.value,
+    pages.value,
+    Boolean(false),
+  );
+  addBookToLibrary(newBook);
+
+  displayLibrary();
+
+  bookTitle.value = "";
+  author.value = "";
+  pages.value = "";
+}
+
+const button = document.querySelector("#create-button");
+button.addEventListener("click", submitClick, false);
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, Boolean(true));
 const carrie = new Book("Carrie", "Stephen King", 322, Boolean(true));
