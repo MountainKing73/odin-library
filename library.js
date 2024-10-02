@@ -95,10 +95,20 @@ function submitClick(event) {
   bookTitle.value = "";
   author.value = "";
   pages.value = "";
+  const dialog = document.querySelector("#newDialog");
+  dialog.close();
+}
+
+function addClick(event) {
+  const dialog = document.querySelector("#newDialog");
+  dialog.showModal();
 }
 
 const button = document.querySelector("#create-button");
 button.addEventListener("click", submitClick, false);
+
+const addButton = document.querySelector("#addBook");
+addBook.addEventListener("click", addClick);
 
 const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, Boolean(true));
 const carrie = new Book("Carrie", "Stephen King", 322, Boolean(true));
