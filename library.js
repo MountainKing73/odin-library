@@ -11,6 +11,19 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
+function submitDelete(event) {
+  myLibrary.splice(event.target.getAttribute("data-index-number"), 1);
+
+  displayLibrary();
+}
+
+function submitRead(event) {
+  const indexNum = event.target.getAttribute("data-index-number");
+  myLibrary[indexNum].read = !myLibrary[indexNum].read;
+
+  displayLibrary();
+}
+
 function displayLibrary() {
   const library = document.querySelector("#library");
 
@@ -31,13 +44,26 @@ function displayLibrary() {
     row.appendChild(th);
   }
 
-  for (let element of myLibrary) {
+  for (var i = 0; i < myLibrary.length; i++) {
     let row = table.insertRow();
-    for (key in element) {
+    for (key in myLibrary[i]) {
       let cell = row.insertCell();
-      let text = document.createTextNode(element[key]);
+      let text = document.createTextNode(myLibrary[i][key]);
       cell.appendChild(text);
     }
+    let delCell = row.insertCell();
+    let delButton = document.createElement("BUTTON");
+    delButton.textContent = "Delete";
+    delButton.setAttribute("data-index-number", i);
+    delButton.addEventListener("click", submitDelete);
+    delCell.appendChild(delButton);
+
+    let readCell = row.insertCell();
+    let readButton = document.createElement("BUTTON");
+    readButton.textContent = "Toggle Read";
+    readButton.setAttribute("data-index-number", i);
+    readButton.addEventListener("click", submitRead);
+    readCell.appendChild(readButton);
   }
 
   library.append(table);
