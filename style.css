@@ -1,0 +1,13 @@
+#newbook {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  padding: 0;
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+  box-sizing: border-box;
+}

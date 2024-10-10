@@ -70,17 +70,34 @@ function displayLibrary() {
 }
 
 function submitClick(event) {
-  console.log("Submit clicked");
   event.preventDefault();
 
   const bookTitle = document.querySelector("#bname");
   const author = document.querySelector("#author");
   const pages = document.querySelector("#pages");
+  const nameError = document.querySelector("#name-error");
+  const authorError = document.querySelector("#author-error");
+  const pagesError = document.querySelector("#pages-error");
 
-  console.log("book title object: " + bookTitle);
-  console.log("title: " + bookTitle.value);
-  console.log("author: " + author.value);
-  console.log("pages: " + pages.value);
+  if (bookTitle.value.length === 0) {
+    nameError.textContent = "Title must be entered.";
+  } else {
+    nameError.textContent = "";
+  }
+
+  if (author.value.length === 0) {
+    authorError.textContent = "Author must be entered.";
+  } else {
+    authorError.textContent = "";
+  }
+
+  if (pages.value.length === 0) {
+    pagesError.textContent = "Pages must be entered.";
+  } else {
+    pagesError.textContent = "";
+  }
+
+  return;
 
   const newBook = new Book(
     bookTitle.value,
@@ -122,7 +139,5 @@ const theSorcerers = new Book(
 addBookToLibrary(theHobbit);
 addBookToLibrary(carrie);
 addBookToLibrary(theSorcerers);
-
-console.log(myLibrary);
 
 displayLibrary();
