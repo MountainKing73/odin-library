@@ -1,6 +1,17 @@
 #newbook {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+}
+
+#newbook input {
+  width: 200px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#newbook button {
+  width: 50px;
 }
 
 .error {

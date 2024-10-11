@@ -79,41 +79,46 @@ function submitClick(event) {
   const authorError = document.querySelector("#author-error");
   const pagesError = document.querySelector("#pages-error");
 
+  let isValid = true;
+
   if (bookTitle.value.length === 0) {
     nameError.textContent = "Title must be entered.";
+    isValid = false;
   } else {
     nameError.textContent = "";
   }
 
   if (author.value.length === 0) {
     authorError.textContent = "Author must be entered.";
+    isValid = false;
   } else {
     authorError.textContent = "";
   }
 
   if (pages.value.length === 0) {
+    isValid = false;
     pagesError.textContent = "Pages must be entered.";
   } else {
     pagesError.textContent = "";
   }
 
-  return;
+  if (isValid) {
+    const newBook = new Book(
+      bookTitle.value,
+      author.value,
+      pages.value,
+      Boolean(false),
+    );
+    addBookToLibrary(newBook);
 
-  const newBook = new Book(
-    bookTitle.value,
-    author.value,
-    pages.value,
-    Boolean(false),
-  );
-  addBookToLibrary(newBook);
+    displayLibrary();
 
-  displayLibrary();
-
-  bookTitle.value = "";
-  author.value = "";
-  pages.value = "";
-  const dialog = document.querySelector("#newDialog");
-  dialog.close();
+    bookTitle.value = "";
+    author.value = "";
+    pages.value = "";
+    const dialog = document.querySelector("#newDialog");
+    dialog.close();
+  }
 }
 
 function addClick(event) {
